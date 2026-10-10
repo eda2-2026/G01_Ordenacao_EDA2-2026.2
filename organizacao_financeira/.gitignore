@@ -1,0 +1,22 @@
+# Ambientes Virtuais
+venv/
+env/
+.env
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest e Cobertura de Testes
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDEs e Sistema Operacional
+.vscode/
+.idea/
+Thumbs.db
+
+# Dados gerados localmente 
+data/*.csv
