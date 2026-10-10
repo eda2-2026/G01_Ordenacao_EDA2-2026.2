@@ -2,6 +2,7 @@ import pytest
 from datetime import date
 from src.domain.transaction import Transaction
 from src.use_cases.radix_sort import radix_sort_transactions
+from src.use_cases.bucket_sort import bucket_sort_by_amount
 
 @pytest.fixture
 def unsorted_transactions() -> list[Transaction]:
@@ -34,3 +35,37 @@ def test_radix_sort_by_date_maintains_stability(unsorted_transactions):
     
     # Verifica o último elemento (a data mais recente)
     assert sorted_list[-1].date == date(2025, 12, 1)
+
+
+
+def test_bucket_sort_separates_by_value_categories():
+    """
+    Verifica se o Bucket Sort separa corretamente as transações em 3 categorias (baldes)
+    baseado no valor (amount): Micro (0-50), Medium (50-200) e High (>200).
+    A ordem original das datas dentro de cada balde DEVE ser preservada (Estabilidade).
+    """
+    # Lista já ordenada por data (simulando a saída do Radix Sort)
+    pre_sorted_transactions = [
+        Transaction(date=date(2025, 1, 1), description="Coffee", amount=5.0),    # Micro
+        Transaction(date=date(2025, 1, 2), description="Rent", amount=1200.0),   # High
+        Transaction(date=date(2025, 1, 3), description="Groceries", amount=150.0),# Medium
+        Transaction(date=date(2025, 1, 4), description="Uber", amount=25.0),     # Micro
+    ]
+
+    buckets = bucket_sort_by_amount(pre_sorted_transactions)
+
+    # Verifica se foram criados os 3 baldes exatos
+    assert len(buckets) == 3
+    assert "Micro" in buckets
+    assert "Medium" in buckets
+    assert "High" in buckets
+
+    # Verifica os tamanhos corretos
+    assert len(buckets["Micro"]) == 2
+    assert len(buckets["Medium"]) == 1
+    assert len(buckets["High"]) == 1
+
+    # Verifica a estabilidade cronológica dentro do balde "Micro"
+    # O "Coffee" era mais antigo que o "Uber", então deve continuar sendo o primeiro.
+    assert buckets["Micro"][0].description == "Coffee"
+    assert buckets["Micro"][1].description == "Uber"
