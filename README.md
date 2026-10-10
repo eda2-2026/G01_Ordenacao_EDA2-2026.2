@@ -1,0 +1,1 @@
+# G01_Ordenacao_EDA2-2026.2
