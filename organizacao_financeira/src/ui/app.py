@@ -17,7 +17,7 @@ def main():
     uploaded_file = st.file_uploader("Faça o upload do arquivo transactions.csv", type="csv")
     
     if uploaded_file is not None:
-        st.success("Arquivo carregado com sucesso! Processando através de algoritmos O(n)...")
+        st.success("Arquivo carregado com sucesso! Processando ...")
         
         service = StatementOrganizerService()
         buckets = service.process_csv_file(uploaded_file)
@@ -35,19 +35,19 @@ def main():
             } for tx in tx_list])
             
         with col1:
-            st.markdown("### 🥉 Micro (R$ 0 - R$ 50)")
+            st.markdown(r"### 🥉 Micro (R\$ 0 - R\$ 50)")
             st.metric("Total de Transações", len(buckets["Micro"]))
             if buckets["Micro"]:
                 st.dataframe(to_dataframe(buckets["Micro"]), use_container_width=True, hide_index=True)
                 
         with col2:
-            st.markdown("### 🥈 Médio (R$ 51 - R$ 200)")
+            st.markdown(r"### 🥈 Médio (R\$ 51 - R\$ 200)")
             st.metric("Total de Transações", len(buckets["Medium"]))
             if buckets["Medium"]:
                 st.dataframe(to_dataframe(buckets["Medium"]), use_container_width=True, hide_index=True)
                 
         with col3:
-            st.markdown("### 🥇 Alto (> R$ 200)")
+            st.markdown(r"### 🥇 Alto (> R\$ 200)")
             st.metric("Total de Transações", len(buckets["High"]))
             if buckets["High"]:
                 st.dataframe(to_dataframe(buckets["High"]), use_container_width=True, hide_index=True)
