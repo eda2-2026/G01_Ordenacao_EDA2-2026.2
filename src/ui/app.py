@@ -43,7 +43,7 @@ def main():
         d_col2.dataframe(df_pizza.style.format({"Total Gasto": "R$ {:.2f}"}), use_container_width=True, hide_index=True)
 
         st.divider()
-        st.subheader("🗂️ Transações Categorizadas e Ordenadas Cronologicamente")
+        st.subheader("Transações Categorizadas e Ordenadas Cronologicamente")
         
         col1, col2, col3 = st.columns(3)
         

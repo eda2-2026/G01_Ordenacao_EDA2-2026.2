@@ -57,13 +57,32 @@ Com a lista agora perfeitamente ordenada por datas, o usuário precisa visualiza
 
 O projeto foi construído separando fortemente as regras de negócio da interface web, seguindo princípios arquiteturais limpos:
 
-* `/src/domain/`: Contém a entidade `Transaction` puramente em Python.
-* `/src/use_cases/`: Contém a lógica pesada (Os algoritmos puros `radix_sort.py` e `bucket_sort.py`, além do orquestrador).
-* `/src/ui/`: Contém a camada de apresentação web (Streamlit).
-* `/src/utils/`: Ferramentas auxiliares, como o gerador automático de massa de dados fictícios.
-* `/tests/`: Testes unitários orientados a comportamento (TDD) para validar a eficácia matemática dos algoritmos.
 
----
+### Estrutura de Diretórios
+
+```text
+G01_Ordenacao_EDA2-2026.2/
+├── data/
+│   └── transactions.csv           # Base de dados fictícia gerada localmente (ignorada no git)
+├── src/
+│   ├── domain/
+│   │   └── transaction.py         # Entidade de domínio pura e tipada
+│   ├── ui/
+│   │   └── app.py                 # Interface interativa e dashboard (Streamlit)
+│   ├── use_cases/
+│   │   ├── bucket_sort.py         # Algoritmo de categorização O(n)
+│   │   ├── radix_sort.py          # Algoritmo de ordenação temporal O(n)
+│   │   └── statement_organizer.py # Orquestrador que conecta a UI aos algoritmos
+│   └── utils/
+│       └── mock_generator.py      # Script de geração automatizada de massa de testes
+├── tests/
+│   └── test_algorithms.py         # Testes unitários focados na estabilidade da ordenação (Pytest)
+├── .gitignore                     # Regras para ignorar o ambiente virtual e arquivos gerados
+├── README.md                      # Documentação completa do projeto
+└── requirements.txt               # Bibliotecas utilizadas (Streamlit, Pandas, Plotly, Pytest)
+```
+
+
 
 ## 5. Como Executar a Aplicação Localmente
 
