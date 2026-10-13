@@ -138,3 +138,11 @@ pytest -v
 ```
 
 Você deverá ver todos os casos de teste relatados em verde indicando sucesso (`PASSED`).
+
+
+
+## 🎥 Vídeo
+
+ **[Apresentação do trabalho desenvolvido no YouTube](https://youtu.be/v3cNe2XBJcc)**
+
+

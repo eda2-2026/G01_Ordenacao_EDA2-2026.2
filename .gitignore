@@ -19,4 +19,4 @@ htmlcov/
 Thumbs.db
 
 # Dados gerados localmente 
-organizacao_financeira/data/*.csv
+data/*.csv
